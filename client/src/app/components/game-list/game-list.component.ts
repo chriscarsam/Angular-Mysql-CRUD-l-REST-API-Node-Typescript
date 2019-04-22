@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { GamesService } from '../../services/games.service';
+import { ConcatSource } from 'webpack-sources';
 
 @Component({
   selector: 'app-game-list',
@@ -16,6 +17,10 @@ export class GameListComponent implements OnInit {
   constructor(private gamesService: GamesService) { }
 
   ngOnInit() {
+    this.getGames();
+  }
+
+  getGames(){
     this.gamesService.getGames().subscribe(
       res => {
         this.games = res;
@@ -24,4 +29,13 @@ export class GameListComponent implements OnInit {
     )
   }
 
+  deleteGame(id: string){
+    this.gamesService.deleteGame(id).subscribe(
+      res => {
+        console.log(res)
+        this.getGames();
+      },
+      err => console.log(err)
+    )
+  }
 }
