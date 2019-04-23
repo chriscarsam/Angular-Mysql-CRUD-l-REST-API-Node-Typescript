@@ -38,4 +38,5 @@ export class GameListComponent implements OnInit {
       err => console.log(err)
     )
   }
+ 
 }
